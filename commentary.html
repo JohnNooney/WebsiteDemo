@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<title>CMP306 Dynamic Web Design 2.</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+
+	<!-- local stylesheet -->
+	<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+	 <!-- Navbar -->
+	 <header>
+		<div class="navbar navbar-expand-md navbar-light d-flex" id="navDesktop">
+	  	 <div class="navbar ml-auto p-2" id="navbarSupportedContent">
+	    	<ul class="navbar-nav">
+	    		<li><a class="nav-item nav-link" href="index.html">Home</a></li>
+	    		<li><a class="nav-item nav-link" href="block1/view/block1.php">Block 1</a></li>
+	    		<li><a class="nav-item nav-link " href="block2/view/block2.php">Block 2</a></li>
+	    		<li><a class="nav-item nav-link" href="block3/view/block3.php">Block 3</a></li>
+	    		<li><a class="nav-item nav-link " href="block4/view/block4.php">Block 4</a></li>
+	    		<li><a class="nav-item nav-link active" href="commentary.html">Commentary</a></li>
+	      	 </ul>
+		 </div>
+		</div>
+		  <nav id="mobileNav">
+			  <div class="pos-f-t">
+	   	   	  <div class="collapse" id="navbarToggleExternalContent">
+	   	   	  <div class="navbar ml-auto p-2" id="navbarSupportedContent">
+	   	   		<ul class="navbar-nav">
+					<li><a class="nav-item nav-link" href="index.html">Home</a></li>
+		    		<li><a class="nav-item nav-link" href="block1/view/block1.php">Block 1</a></li>
+		    		<li><a class="nav-item nav-link " href="block2/view/block2.php">Block 2</a></li>
+		    		<li><a class="nav-item nav-link" href="block3/view/block3.php">Block 3</a></li>
+		    		<li><a class="nav-item nav-link " href="block4/view/block4.php">Block 4</a></li>
+		    		<li><a class="nav-item nav-link active" href="commentary.html">Commentary</a></li>
+		      	 </ul>
+	   	   	 </div>
+	   	   	  </div>
+	   	   	  <nav class="navbar navbar-dark bg-info">
+	   	   	    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+	   	   	      <span class="navbar-toggler-icon"></span>
+	   	   	    </button>
+	   	   	  </nav>
+	   	   	</div>
+		  </nav>
+	</header><!--Navbar-->
+
+	<!-- header row -->
+	<div id="header" class="jumbotron jumbotron-fluid">
+		<div class="container">
+			<h1>CMP306</h1>
+			<h2>Dynamic Web Development</h2>
+		</div>
+	</div><!-- header -->
+
+	<!-- overall container for page -->
+	<div class="container">
+    <div class="container bg-faded" id="commentaries">
+		<div class="row" id="block1">
+			<h1 style="font-weight: bold;">Block 1</h1>
+			<div class="row" id="row1">
+	            <div class="col">
+	                <h2>Advantages of Bootstrap</h2>
+	                <ul>
+	                    <li><p>One of the biggest advantages of using Bootstrap over standard html is the responsivness of the framework.
+	                           For example, when making use of components of bootstrap you do not have to worry about switching devices or screen sizes
+	                           and seeing your webpage completely broken.</p></li>
+	                    <li><p>Another great aspect of using Bootstrap over HTML is how much time it saves. When using bootstrap you come across
+	                           many different classes that are already formatted for you and need little to no CSS in order to look nice and professional.</p></li>
+	                    <li><p>Bootstrap also has great compatabilty with HTML and CSS. What I mean by this is that if you are already familiar with how to
+	                           use HTML and CSS then you will be able to use Bootstrap very easily and you can pick and choose certain pieces of bootstrap
+	                           to use alongside your CSS and HTML code.</p></li>
+	                </ul>
+	            </div>
+	        </div>
+	        <div class="row" id="row2">
+	            <div class="col">
+	                <h2>DB Design</h2>
+	                <img src="block1/pics/CMP306MusicDiagram.jpg" alt="Image of the database design">
+	            </div>
+	        </div>
+			<div class="row" id="row3">
+			   <div class="col">
+				   <h2>MVC Design</h2>
+				   <h3>API code</h3>
+				   <pre>
+					   <code>
+<?php
+//display error messages
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+// Connect to database
+include("open_connection.php");
+$db = new dbObj();
+$conn =  $db->getConnstring();
+
+
+//  function to get all the genre cards info *******Use code from loadblock1.php
+function getCards()
+{
+   global $conn;
+
+   //fetch data from table in db
+   $sqlGenreDetails = "SELECT g.gId, Genre as genreTitle,  SUBSTRING(artDesc,1,100) AS artDescPreview, artPath, imgName, imgPath
+   FROM `Music Genres` AS g
+   JOIN `Music GenreArticles` AS gA on gA.gId = g.gId
+   JOIN `Music GenreImages` AS gI on gI.gId = g.gId
+   JOIN `Music Articles` AS art on art.artId = gA.artId
+   JOIN `Music Images` AS img on img.imgId = gI.imgId";
+
+   //send select query to db
+   $result = mysqli_query($conn, $sqlGenreDetails);
+
+   //checks if there is any data in the table
+   if(mysqli_num_rows($result) > 0){
+       //  convert to JSON
+		$rows = array();
+		while($r = mysqli_fetch_assoc($result)) {
+   		$rows[] = $r;
+		}
+	 	return json_encode($rows);
+   }
+   else{
+       echo "Error No Results Found in Server";
+       }
+}
+
+//  function to get the articles related to the genre *******Use code from loadblock1_articles.php
+function getArticles()
+{
+   global $conn;
+
+   //fetch data from table in db
+   $sqlGenreDetails = "SELECT g.gId, Genre as genreTitle, artDesc, artPath, imgName, imgPath
+   FROM `Music Genres` AS g
+   JOIN `Music GenreArticles` AS gA on gA.gId = g.gId
+   JOIN `Music GenreImages` AS gI on gI.gId = g.gId
+   JOIN `Music Articles` AS art on art.artId = gA.artId
+   JOIN `Music Images` AS img on img.imgId = gI.imgId
+   WHERE '" . $_SESSION['articlePath'] . "' = artPath";
+
+
+   //send select query to db
+   $result = mysqli_query($conn, $sqlGenreDetails);
+
+   //checks if there is any data in the table
+   if(mysqli_num_rows($result) > 0){
+       //  convert to JSON
+		$rows_art = array();
+		while($r = mysqli_fetch_assoc($result)) {
+   		$rows_art[] = $r;
+		}
+		return json_encode(utf8ize($rows_art));
+   }
+   else{
+     echo "Error No Results Found in Server";
+   }
+}
+
+//****** This is code from: https://www.thetopsites.net/article/52641198.shtml
+/* Use it for json_encode some corrupt UTF-8 chars
+* useful for = malformed utf-8 characters possibly incorrectly encoded by json_encode
+*/
+function utf8ize( $mixed ) {
+   if (is_array($mixed)) {
+       foreach ($mixed as $key => $value) {
+           $mixed[$key] = utf8ize($value);
+       }
+   } elseif (is_string($mixed)) {
+       return mb_convert_encoding($mixed, "UTF-8", "UTF-8");
+   }
+   return $mixed;
+}
+
+
+
+?>
+					   </code>
+				   </pre>
+				  <p> It is important to keep in mind that once the data is captured from the DB
+				  it is then encoded via JSON and then decoded in view/loadblock.php or view/loadblock_articles.PHP
+			  	  where the data is taken and placed into some html.</p>
+
+			   </div>
+		   </div>
+		   <div class="row" id="row4">
+			   <div class="col">
+				   <h2>Advantages of Bootstrap</h2>
+				   <p>One of the biggest advantages of using Bootstrap over standard html is the responsivness of the framework.
+					  For example, when making use of components of bootstrap you do not have to worry about switching devices or screen sizes
+					  and seeing your webpage completely broken.</p>
+			   </div>
+   			</div>
+		</div>
+		<div class="row" id="block2">
+			<h1 style="font-weight: bold;">Block 2</h1>
+			<div class="row" id="row1">
+				<div class="col">
+					<h2>JSON-API User Update Post</h2>
+					<p>When a user wants to post a question, answer, or edit one of their posts the data is entered into a form
+						and then sent via a POST operation to a controller which takes that data, modifies it to ensure security, and
+						then calls a method located in the API to create the corresponding query to the requested operation. Specifically
+						for the user to update one of their posts the user will have to first click on a button which will bring up a menu with
+						a form in it. This form has a textare which has the text loaded into it that the user wants to edit. This is done by creating a
+						hidden input field which holds the answer information and is extracted into a Jquery variable and then placed into the textarea.
+						After that the user types in the updated message and that goes through the process listed above: POSTed, processed, and queried.
+						The user is then brought back to the blog to see their updated post.</p>
+				</div>
+			</div>
+			<div class="row" id="row2">
+				<div class="col">
+					<h2>Security Measures</h2>
+					<p>The secuity measures that I have implemented into my code go through a multi-stage process. Firs it
+						begins in the controller where the inputs are sanatized using PHP's filter_var(..,FILTER_SANITIZE_STRING)
+						and  mysqil_real_escape_string() both of these used in conjection will ensure that SQL injection is not
+						possible. But in the off case that that stage somehow fails then there is another stage within the API
+						that takes recieved json data from the controller and places it into PDO sql statements. All of these
+					 	methods used together are used for any part of the site where the user is allowed to enter text.</p>
+				</div>
+			</div>
+			<div class="row" id="row3">
+				<div class="col">
+					<h2>Login/Logout Process</h2>
+					<p>The login/logout process begins in the html where there is a button to login. When this is clicked a Jquery listener is
+						actived and shows the login bootstrap modal. In this model the user is provided with the option to either login or signup.
+						each of these options lead the user to a form where the entered data is POSTed to a controller. In this controller the data
+						is sanatized and then json encoded to then be sent to the API functions which make the queries. For the sign up query the Email
+						is first checked to make sure that it doesnt already exist within the database. If it doesn't then it will create a new Account
+						and send the user to the home screen where they will then be able to login with their new account. When the user logs in
+						the API checks to see that the email exists within the database and password_verifys the password. Once that is done
+						a SESSION is now created where the userId and Nicname is stored. These are used to verify that the user's corresponging
+						questions and answers are able to editable. If the question/answer is editable then a button appears where they can edit
+						said post. Once the user logs out their sessions are unset. Once the SESSIONS are unset a check is made to see if they are
+						unset and revokes the ability to post a question or answer. This code can be found within the loadblock2.php file</p>
+				</div>
+			</div>
+
+		 </div>
+		 <div class="row" id="block3">
+			<h1 style="font-weight: bold;">Block 3</h1>
+			<div class="row" id="row1">
+				<div class="col">
+					<h2>Data Flow Diagrams</h2>
+					<div class="row">
+						<div class="col">
+							<p>IMP LED Data Flow</p>
+							<img src="block1/pics/dfdled.jpg"/>
+						</div>
+						<div class="col">
+							<p>Temperature Data Flow</p>
+						<img src="block1/pics/dfdtemp.jpg"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="row2">
+				<div class="col">
+					<h2>Advantages of Using JSON</h2>
+					<p>One of the first key advantages of using JSON to pass and store data that comes to mind is the ability for the data to be
+						easily accessible to other languages. Since most languages are able to make use of the JSON libraries then that means data
+						between languages and applications are able to be sent to each other. Another key advantage of JSON is that the abiltiy to
+						parse data is extremely easy and fast. The syntax is small and lightweight which makes the execution times much faster. Along
+						the same lines as the last point, JSON is very readable. Because of JSON's simplicty of use, this adds predicitaility and
+						increases readability.
+					</p>
+				</div>
+			</div>
+			<div class="row" id="row3">
+				<div class="col">
+					<h2>HIVE Data Storage</h2>
+					<p>With a large system like the HIVE there should be a great deal of effort put into the security aspects of the system. With this
+						in mind we can begin by assuming which components of the system need to be secure. We can start with that each device owned by a user
+						will need to be represented as it's own product, which means that each devcie will have its own unique identifier because if otherwise
+						there will be issues with devices in the database overlapping data. For this to happen each device a user owns will need to generate a
+						unique identifier upon connection to the database. Once this identifier is created then the device will be officially registered but to
+						ensure that it is registered to the correct user there will most likely be an application or website where the user connects to the same
+						network that the device is on and the device will then show up for the user to link their account to that device. When this happens the
+						database will most likely create an associative relation between the user's account id and the unique id of the device. Once this device is
+						linked to the user then it will be linked to to the other device on the network which then allow them to communicate amongst each other. In
+						order to ensure the security of these devices, access to them would be locked in the app unless the verified user is logged in.
+					</p>
+				</div>
+			</div>
+
+		 </div>
+
+    </div>
+
+	</div> <!-- container -->
+
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+<!-- Footer -->
+<footer class="page-footer fixed-bottom font-small blue">
+  <!-- Copyright -->
+  <div class="footer-copyright py-3 container bg-faded" id="footer">
+    <a class="text-center"> John Nooney</a>
+	<a class="text-right" href=""> 1803534@uad.ac.uk</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->
+
+</html>

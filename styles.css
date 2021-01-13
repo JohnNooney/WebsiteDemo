@@ -1,0 +1,219 @@
+html, body{
+    height: 100%;
+}
+
+body{
+    margin-bottom: 80px;
+}
+
+.jumbotron{
+    background-color:#add8e6;
+}
+
+#commentaries{
+    margin-bottom: 50px;
+    padding: 30px;
+}
+
+#commentaries .row{
+    margin: 5px;
+    margin-bottom: 30px;
+}
+
+#commentaries h2{
+    text-decoration: underline;
+}
+
+pre{
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#homePage{
+    padding: 15px;
+}
+
+#footer{
+    background-color: #add8e6!important;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.navbar-nav .active{
+    background-color: #add8e6!important;
+    border-radius: 10px;
+}
+
+#genreInfo{
+    margin-top: 20px;
+    margin-bottom: 80px;
+}
+
+#genreCard{
+    margin:20px 10px 20px 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#genreCard,img{
+    padding: 10px;
+}
+
+#imgDesc{
+    margin-bottom: 20px;
+}
+
+#articles{
+    padding: 20px !important;
+    margin-bottom: 30px;
+}
+
+#articleContent{
+    padding: 15px;
+}
+
+#articleInfo{
+    padding: 10px;
+}
+
+#artTitle h2{
+    font-weight: bold;
+}
+
+#artRecommend::after{
+    margin-bottom: 50px;
+}
+
+#itemsTitle h2{
+    font-weight: bold;
+}
+
+.rpc {
+  background-color: rgba(112, 112, 112, 0.05);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+#rpc h4{
+    font-weight: bold;
+}
+
+#rpc .card-text, #rpc footer, #rpc textarea{
+    padding: 20px;
+}
+
+.btn-outline-primary {
+    padding: 10px;
+    margin: 5px;
+}
+
+#extraQuestion{
+    margin-top: 20px;
+}
+
+.form-control, .form-control:focus, .input-group-addon {
+		border-color: #e1e1e1;
+        border-radius: 0;
+	}
+.modal-login {
+  width: 320px;
+}
+.modal-login .modal-content {
+  border-radius: 1px;
+  border: none;
+}
+.modal-login .modal-header {
+  position: relative;
+  justify-content: center;
+  background: #f2f2f2;
+}
+.modal-login .modal-body {
+  padding: 30px;
+}
+.modal-login .modal-footer {
+  background: #f2f2f2;
+}
+.modal-login h4 {
+  text-align: center;
+  font-size: 26px;
+}
+.modal-login h5 {
+  text-align: center;
+  font-size: 18px;
+}
+.modal-login label {
+  font-weight: normal;
+  font-size: 13px;
+}
+.modal-login .form-control, .modal-login .btn {
+  min-height: 38px;
+  border-radius: 2px;
+}
+.modal-login .hint-text {
+  text-align: center;
+}
+.modal-login .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.modal-login .checkbox-inline {
+  margin-top: 12px;
+}
+.modal-login input[type="checkbox"]{
+  margin-top: 2px;
+}
+
+.modal-login .btn {
+  min-width: 100px;
+  background: #3498db;
+  border: none;
+  line-height: normal;
+}
+.modal-login #btnSignUp {
+background: #e1e1e1 !important;
+}
+#adminModal #btnSignOut{
+background: #e1e1e1 !important;
+}
+.modal-login .btn:hover, .modal-login .btn:focus {
+  background: #248bd0;
+}
+.modal-login .hint-text a {
+  color: #999;
+}
+
+hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+}
+
+#greetings{
+    padding: 10px;
+    margin-left: 5px;
+}
+
+.modal-login .error label{
+    color: red;
+    border: 1px solid;
+     border-radius: 4px;
+}
+
+#buttons{
+    padding: 10px
+}
+
+@media(max-width:767px){
+  header #navDesktop {
+    display: none !important;
+  }
+}
+@media(min-width:768px){
+  header #mobileNav {
+    display: none;
+  }
+}
