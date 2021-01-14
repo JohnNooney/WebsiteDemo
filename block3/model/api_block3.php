@@ -67,23 +67,25 @@ function getTempData(){
     global $conn;
 
     //create query to get the IoT data of each pin
-    $sqlPin8Details = "SELECT pin, temp, dttm AS time
+    $sqlPin8Details = "SELECT pin, temp,  DATE_FORMAT(dttm,'%h:%i %p') AS time
                         FROM `ElectricalImp`
                         RIGHT JOIN `ElectricalImp PinTemps` as pTemps ON pTemps.id = pinval
-                        WHERE pin = 8";
+                        WHERE pin = 8
+                        AND dttm >= NOW() - INTERVAL 1 DAY";
 
                         //AND dttm >= NOW() - INTERVAL 1 DAY
 
-    $sqlPin9Details = "SELECT pin, temp, dttm AS time
+    $sqlPin9Details = "SELECT pin, temp, DATE_FORMAT(dttm,'%h:%i %p') AS time
                         FROM `ElectricalImp`
                         RIGHT JOIN `ElectricalImp PinTemps` as pTemps ON pTemps.id = pinval
-                        WHERE pin = 9";
+                        WHERE pin = 9
+                        AND dttm >= NOW() - INTERVAL 1 DAY";
 
     //send select query to db
     $pin8result = mysqli_query($conn, $sqlPin8Details);
     $pin9result = mysqli_query($conn, $sqlPin9Details);
 
-    //checks if there is any data in the table
+    //checks if there is any data in the table for the past day
     if(mysqli_num_rows($pin8result) > 0 && mysqli_num_rows($pin9result) > 0 ){
 
       //  convert to JSON
@@ -104,8 +106,78 @@ function getTempData(){
 
 	 	return json_encode($bothpins);
     }
+    //try this if the data is not from 24 hours ago
     else{
-        echo "<p>Error No Results Found in Server</p>";
+      $sqlPin8DetailsBackup = "SELECT * FROM(SELECT pinval, pin, temp, DATE_FORMAT(dttm,'%h:%i %p') AS time
+      FROM `ElectricalImp`
+      RIGHT JOIN `ElectricalImp PinTemps` as pTemps ON pTemps.id = pinval
+      WHERE pin = 8
+      ORDER BY pinval DESC
+      LIMIT 25) AS foo
+      ORDER BY foo.pinval ASC";
+  
+      //AND dttm >= NOW() - INTERVAL 1 DAY
+  
+      $sqlPin9DetailsBackup = "SELECT * FROM(SELECT pinval, pin, temp, DATE_FORMAT(dttm,'%h:%i %p') AS time
+      FROM `ElectricalImp`
+      RIGHT JOIN `ElectricalImp PinTemps` as pTemps ON pTemps.id = pinval
+      WHERE pin = 9
+      ORDER BY pinval DESC
+      LIMIT 25) AS foo
+      ORDER BY foo.pinval ASC";
+  
+      //send select query to db
+      $pin8result = mysqli_query($conn, $sqlPin8DetailsBackup);
+      $pin9result = mysqli_query($conn, $sqlPin9DetailsBackup);
+  
+      //checks if there is any data in the table for the past day
+      if(mysqli_num_rows($pin8result) > 0 && mysqli_num_rows($pin9result) > 0 ){
+  
+        //  convert to JSON
+          $bothpins = array();
+  
+        while($r = mysqli_fetch_assoc($pin8result)) {
+            $bothpins['pin8'][] = array(
+              "temp" => $r["temp"],
+              "time" => $r["time"]);
+            }
+            while($r = mysqli_fetch_assoc($pin9result)) {
+              $bothpins['pin9'][] = array(
+                "temp" => $r["temp"],
+                "time" => $r["time"]);
+            }
+       return json_encode($bothpins);
         }
+      }
+}
+
+function getLEDState(){
+  global $conn;
+
+  //get led info
+  $ledStates = "Select * From `ElectricalImp LED`";
+  $results = mysqli_query($conn, $ledStates);
+
+  while($r = mysqli_fetch_assoc($results)) {
+    $rows[] = $r;
+  }
+
+  return json_encode($rows);
+}
+
+function setLEDState($data){
+  global $conn;
+  $data = json_decode($data) ;
+
+  //bind data
+  $pin = $data-> pin;
+  $state = $data-> state;
+
+  //insert values into pinTemps table first
+  $stmt1 = $conn->prepare("UPDATE `ElectricalImp LED` SET state = ? WHERE pin = ?");
+  $stmt1->bind_param("ii", $state, $pin);
+  $stmt1->execute();
+
+  return;
 }
 ?>

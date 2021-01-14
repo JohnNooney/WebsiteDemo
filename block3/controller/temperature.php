@@ -1,5 +1,5 @@
 <?php
-include("../model/php/api_block3.php") ;
+include("../model/api_block3.php") ;
 //  get the new data
 $message = file_get_contents('php://input') ;
 

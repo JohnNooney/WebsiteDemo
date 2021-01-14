@@ -1,5 +1,5 @@
 <?php
-include("../model/php/api.php") ;
+include("../model/api.php") ;
 $cardsinfo = getCards() ;
 // echo $employeetxt ;
 $cards = json_decode($cardsinfo) ;
@@ -28,5 +28,5 @@ for ($i=0; $i < sizeof($cards)/3; $i++) {
   }
 
 
-  include("../model/php/close_connection.php");
+  include("../model/close_connection.php");
  ?>

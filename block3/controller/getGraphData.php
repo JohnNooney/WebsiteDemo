@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 
-include("../model/php/api_block3.php") ;
+include("../model/api_block3.php") ;
 
 //makes sure post has been initiated
 $data = getTempData();
@@ -23,8 +23,8 @@ $pin9Data[] =  $temp['temp'];
 }
 
 foreach ($pindata['pin8'] as $datetime) {
-    $time = substr($datetime['time'], 11);
-    $times[] =  $time;
+    //$time = substr($datetime['time'], 11);
+    $times[] =  $datetime['time'];
 }
 
 

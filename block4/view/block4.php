@@ -3,13 +3,6 @@
 //start session to keep track of $_SESSION
 ob_start();
 session_start();
-
-//display any user feedback messages
-if (isset($_SESSION['message'])) {
-    echo '<input id="loginMessage" type="hidden" name="msg" value="' . $_SESSION['message'] . '">';
-
-     unset($_SESSION['message']);
-}
 ?>
 
 <html>
@@ -35,10 +28,10 @@ if (isset($_SESSION['message'])) {
 	    	<ul class="navbar-nav">
 	    		<li><a class="nav-item nav-link" href="../../index.html">Home</a></li>
 	    		<li><a class="nav-item nav-link" href="../../block1/view/block1.php">Block 1</a></li>
-	    		<li><a class="nav-item nav-link active" href="block2.php">Block 2</a></li>
+	    		<li><a class="nav-item nav-link" href="../../block2/view/block2.php">Block 2</a></li>
 	    		<li><a class="nav-item nav-link" href="../../block3/view/block3.php">Block 3</a></li>
-	    		<li><a class="nav-item nav-link " href="../../block4/view/block4.php">Block 4</a></li>
-	    		<li><a class="nav-item nav-link " href="../../commentary.html">Commentary</a></li>
+	    		<li><a class="nav-item nav-link active" href="../../block4/view/block4.php">Block 4</a></li>
+	    		<li><a class="nav-item nav-link" href="../../commentary.html">Commentary</a></li>
 	      	 </ul>
 		 </div>
 		</div>
@@ -49,10 +42,10 @@ if (isset($_SESSION['message'])) {
 	   	   		<ul class="navbar-nav">
                     <li><a class="nav-item nav-link" href="../index.html">Home</a></li>
     	    		<li><a class="nav-item nav-link" href="../../block1/view/block1.php">Block 1</a></li>
-    	    		<li><a class="nav-item nav-link active" href="block2.php">Block 2</a></li>
+    	    		<li><a class="nav-item nav-link " href="../../block2/view/block2.php">Block 2</a></li>
     	    		<li><a class="nav-item nav-link" href="../../block3/view/block3.php">Block 3</a></li>
-    	    		<li><a class="nav-item nav-link " href="../../block4/view/block4.php">Block 4</a></li>
-    	    		<li><a class="nav-item nav-link " href="../../commentary.html">Commentary</a></li>
+    	    		<li><a class="nav-item nav-link active" href="../../block4/view/block4.php">Block 4</a></li>
+    	    		<li><a class="nav-item nav-link" href="../../commentary.html">Commentary</a></li>
     	      	 </ul>
 	   	   	 </div>
 	   	   	  </div>
@@ -74,27 +67,70 @@ if (isset($_SESSION['message'])) {
 	</div><!-- header -->
 
     <!-- overall container for page -->
-    <div class="container rpc">
+    <div class="container xml">
 	    <div class="card" id="itemsTitle">
-	        <h2 class="text-center">Welcome to the Not So RPC Blog</h2>
-	    </div>
-		<div class="row text-center" id="modal">
-			<!-- the login and signup modals/ if already logged in then signout-->
-		   <?php include("modals/loginModal.php"); ?>
-           <!-- the answer question modal-->
-           <?php include("modals/answerModal.php"); ?>
-           <!-- the update answer modal-->
-           <?php include("modals/editAnswerModal.php"); ?>
-           <!-- the update question modal-->
-           <?php include("modals/editQuestionModal.php"); ?>
-		</div>
+            <h2 class="text-center">This is the XML RSS Feed Homepage</h2>
+        </div>
+        
+        <br/><br/>
+        
+        
+        <div class="row text-center">
+           
+			<div class="col-md-4">
+				<div class="card" style="padding:10px;">
+					<a href="https://validator.w3.org/feed/check.cgi?url=https%3A//mayar.abertay.ac.uk/%7E1803534/cmp306/block4/view/rss.php"><img src="valid-rss-rogers.png" alt="[Valid RSS]" title="Validate my RSS feed" /></a>
+                    <form action="rss.php" method="post">
+                        <input type="submit" class="btn btn-primary" value="Click to view RSS Feed"/>
+                    </form>
+                </div>
+            </div>
+			
+			<div class="col-md-4">
+				<div class="card">
+					<div class="row text-center">
+						<div class="col">
+							<p>YR.no Weather</p>
+							<hr/>	
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col">
+							<?php include('weatherxml.php');?> <!--echos the weather xml data and displays-->
+						</div>
+					</div>
+                    
+                </div>
+            </div>
 
+			<div class="col-md-4">
+				<div class="card">
+				<div class="row text-center">
+						<div class="col">
+							<p>Web Service Requests</p>
+							<hr/>	
+						</div>
+						
+					</div>
+					<div class="row">
+						<div class="col">
+							<form action="../controller/questions_6.php" method="post">
+								<input type="submit" class="btn btn-primary" value="Click to view the last 6 Questions."/>
+							</form>
+							<br/>
+							<form action="../controller/question.php" method="post">
+								<input type="submit" class="btn btn-primary" value="Click to view One Question."/>
+							</form>
+							<br/>
+						</div>
+					</div>
+                </div>
+            </div>
 
-	    <!-- Where the RPC data will be displayed-->
-	    <div class="text-center" id="rpc" style="padding: 15px">
-
-			<?php include("loadblock2.php"); ?>
-	    </div>
+			
+						
+        </div>
 
 	</div> <!-- container -->
 

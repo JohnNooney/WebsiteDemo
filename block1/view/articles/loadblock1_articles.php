@@ -1,5 +1,5 @@
 <?php
-include("../../model/php/api.php") ;
+include("../../model/api.php") ;
 //get related articles
 $articletxt = getArticles() ;
 $articles = json_decode($articletxt) ;

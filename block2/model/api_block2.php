@@ -87,9 +87,10 @@ function signUp($txt)
     $email = $data -> email;
     $password = $data -> password;
 
+
     $query = $conn->prepare("SELECT * FROM `Blog Users` WHERE email = ?");
     $query->bind_param("s", $email);
-    $result = $query->execute();
+    $result = mysqli_query($conn, $query);
     //check to make sure the entered email doesn't exist already in the db
     if (mysqli_num_rows($result) > 0)
     {

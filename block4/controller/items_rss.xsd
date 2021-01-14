@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+            xmlns="https://mayar.abertay.ac.uk/~1803534/cmp306/block4/view/rss.php"
+            targetNamespace="https://mayar.abertay.ac.uk/~1803534/cmp306/block4/view/rss.php"
+            >
+
+    <xs:annotation>
+        <xs:documentation>XML Schema for RSS v2.0 feed files.</xs:documentation>
+        <xs:documentation>Revision: 1</xs:documentation>
+        <xs:documentation>Date: 04-December-2003</xs:documentation>
+        <xs:documentation>Based on the RSS 2.0 specification document at http://feeds.archive.org/validator/docs/rss2.html</xs:documentation>
+        <xs:documentation>Author: John Nooney</xs:documentation>
+    </xs:annotation>
+
+<!--Complex Types Defintions-->
+ <xs:complexType name="rss">
+    <xs:sequence>
+        <xs:element name="channel" type="channel" maxOccurs="unbounded"/>
+    </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="channel">
+    <xs:sequence>
+        <xs:element ref="atom:link"/>
+        <xs:element ref="title"/>
+        <xs:element name="item" type="item" maxOccurs="unbounded"/>
+    </xs:sequence>
+ </xs:complexType>
+
+ <xs:complexType name="item">
+    <xs:sequence>
+        <xs:element ref="title" />
+        <xs:element ref="description" />
+        <xs:element ref="image" />
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+ </xs:complexType>
+
+ <!--Simple Type-->
+
+  <!--Define elements-->
+  <xs:element name="title" type="xs:string"/>
+  <xs:element name="description" type="xs:string"/>
+  <xs:element name="image" type="xs:string"/>
+  <xs:element name="title" type="xs:string"/>
+  <xs:element name="atom:link" type="xsd:anyURI"/>
+ 
+</xs:schema>
+

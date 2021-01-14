@@ -6,7 +6,7 @@ body{
     margin-bottom: 80px;
 }
 
-.jumbotron{
+.jumbotron, .header{
     background-color:#add8e6;
 }
 
@@ -87,7 +87,7 @@ pre{
     font-weight: bold;
 }
 
-.rpc {
+.rpc, .iot, .gCards, .xml, #homePage {
   background-color: rgba(112, 112, 112, 0.05);
   border-radius: 5px;
   padding: 5px;
@@ -207,13 +207,15 @@ hr {
     padding: 10px
 }
 
-@media(max-width:767px){
+@media(max-width:767px){ /*for mobile*/
   header #navDesktop {
     display: none !important;
   }
+  
 }
-@media(min-width:768px){
+@media(min-width:768px){ /*for browser*/
   header #mobileNav {
     display: none;
   }
 }
+

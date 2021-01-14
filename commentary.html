@@ -83,7 +83,7 @@
 	        <div class="row" id="row2">
 	            <div class="col">
 	                <h2>DB Design</h2>
-	                <img src="block1/pics/CMP306MusicDiagram.jpg" alt="Image of the database design">
+	                <img src="block1/view/pics/CMP306MusicDiagram.jpg" alt="Image of the database design">
 	            </div>
 	        </div>
 			<div class="row" id="row3">
@@ -221,8 +221,8 @@ function utf8ize( $mixed ) {
 					<h2>Security Measures</h2>
 					<p>The secuity measures that I have implemented into my code go through a multi-stage process. Firs it
 						begins in the controller where the inputs are sanatized using PHP's filter_var(..,FILTER_SANITIZE_STRING)
-						and  mysqil_real_escape_string() both of these used in conjection will ensure that SQL injection is not
-						possible. But in the off case that that stage somehow fails then there is another stage within the API
+						and  mysqil_real_escape_string() both of these used in conjection will ensure that SQL injection possibilities are 
+						lessened. But in the off case that that stage somehow fails then there is another stage within the API
 						that takes recieved json data from the controller and places it into PDO sql statements. All of these
 					 	methods used together are used for any part of the site where the user is allowed to enter text.</p>
 				</div>
@@ -230,9 +230,8 @@ function utf8ize( $mixed ) {
 			<div class="row" id="row3">
 				<div class="col">
 					<h2>Login/Logout Process</h2>
-					<p>The login/logout process begins in the html where there is a button to login. When this is clicked a Jquery listener is
-						actived and shows the login bootstrap modal. In this model the user is provided with the option to either login or signup.
-						each of these options lead the user to a form where the entered data is POSTed to a controller. In this controller the data
+					<p>Once the login button is pushed a login bootstrap modal is displayed. In this model the user is provided with the option to either 
+						login or signup. each of these options lead the user to a form where the entered data is POSTed to a controller. In this controller the data
 						is sanatized and then json encoded to then be sent to the API functions which make the queries. For the sign up query the Email
 						is first checked to make sure that it doesnt already exist within the database. If it doesn't then it will create a new Account
 						and send the user to the home screen where they will then be able to login with their new account. When the user logs in
@@ -240,7 +239,7 @@ function utf8ize( $mixed ) {
 						a SESSION is now created where the userId and Nicname is stored. These are used to verify that the user's corresponging
 						questions and answers are able to editable. If the question/answer is editable then a button appears where they can edit
 						said post. Once the user logs out their sessions are unset. Once the SESSIONS are unset a check is made to see if they are
-						unset and revokes the ability to post a question or answer. This code can be found within the loadblock2.php file</p>
+						unset and revokes the ability to post a question or answer.</p>
 				</div>
 			</div>
 
@@ -253,11 +252,11 @@ function utf8ize( $mixed ) {
 					<div class="row">
 						<div class="col">
 							<p>IMP LED Data Flow</p>
-							<img src="block1/pics/dfdled.jpg"/>
+							<img src="block1/view/pics/dfdled.jpg"/>
 						</div>
 						<div class="col">
 							<p>Temperature Data Flow</p>
-						<img src="block1/pics/dfdtemp.jpg"/>
+						<img src="block1/view/pics/dfdtemp.jpg"/>
 						</div>
 					</div>
 				</div>
@@ -287,6 +286,45 @@ function utf8ize( $mixed ) {
 						database will most likely create an associative relation between the user's account id and the unique id of the device. Once this device is
 						linked to the user then it will be linked to to the other device on the network which then allow them to communicate amongst each other. In
 						order to ensure the security of these devices, access to them would be locked in the app unless the verified user is logged in.
+					</p>
+				</div>
+			</div>
+		 </div>
+
+		 <div class="row" id="block4">
+			<h1 style="font-weight: bold;">Block 4</h1>
+			<div class="row" id="row1">
+				<div class="col">
+					<h2>Dynamic RSS from DB</h2>
+					<div class="row">
+						<div class="col">
+							<p>In order to create a dynamic RSS feed from the database I had to begin by making a call to the database in order to get the relevant data.
+								I did this by reusing the API from block 1. Once I had the data I decided that in order to make the RSS feed dynamic then the XML file 
+								used for the RSS would have to written every time the request to view it is made. Using PHP and SimpleXML I was able to take the data from 
+								the database and place it in variables to be used in the XML tags. I also had to make sure the XML file was able to be formatted as an RSS feed, 
+								which was also done dynamically with PHP. Every time the file is created in PHP, I made sure the format conforms to the W3 specifications of an RSS FEed.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" id="row2">
+				<div class="col">
+					<h2>XSLT Process</h2>
+					<p>The way I used XSLT to generate the weather forecast is quite simple. First in my PHP script make a SimpleXMLload from the weather forecast website. In this case
+						I am using YR.no and in order to get the exact information I want from the website; the location and temperature. I had to look at the source XML file to see how
+						it is structured. This is vital since XSLT relies on direct tag calls in order pull the relevant information from the source. After locating all the 
+						necessary tags then in the same PHP file that requests the XML weather forecast, I create an XSLT processor object which sends the XML file to essentially parse
+						all the relevant information for me and restyle it for how it should be displayed on my website. 
+					</p>
+				</div>
+			</div>
+			<div class="row" id="row3">
+				<div class="col">
+					<h2>Simple Service</h2>
+					<p>I create a simple service that contains a library of all the relevant functions and a file that handles the requests made to the service. On my main website I have 2 buttons
+						that, when clicked, either send the user to page that has requested 6 of the most recent questions or 1 question from a user id specified in the file. When a request is made 
+						via a curl, it is handled in the web service by responding with the relevant json data. The json data is then sent back to the requesting php file and decoded to be displayed.
 					</p>
 				</div>
 			</div>

@@ -10,22 +10,25 @@ $(document).ready(function () {
             var pin8Temps = jsonResult.pin8Temps;
             var pin9Temps = jsonResult.pin9Temps;
 
+            //place the two most recent values above the graph
+            $("#temp8First").text("Pin 8: " + pin8Temps[0]);
+            $("#temp9First").text("Pin 9: " + pin9Temps[0]);
             var ctx = document.getElementById('tempChart').getContext('2d');
 
             var myChart = new Chart(ctx, {
                 type: 'line',
             data: {
                 datasets: [{
-                    label: 'Pin 8',
-                    backgroundColor: ["rgba(500, 0, 0, 1)"],
+                    label: 'Internal Temp - pin8',
+                    backgroundColor: "rgb(250, 0, 0)",
                     fill: false,
                     data: pin8Temps
                     
                     
                 },
                 {
-                    label: 'Pin 9',
-                    backgroundColor: ["rgba(0, 0, 500, 1)"],
+                    label: 'External Temp - pin9',
+                    backgroundColor: "rgb(0, 0, 250)",
                     fill: false, 
                     data: pin9Temps
 
@@ -38,6 +41,10 @@ $(document).ready(function () {
                         scaleLabel:{
                             display: true,
                             labelString: 'Temperature (Celcius)'
+                        },
+                        ticks: {
+                            beginAtZero: false,
+                            stepSize: 2
                         }
                     }],
                     xAxes:[{
@@ -46,12 +53,19 @@ $(document).ready(function () {
                             labelString: 'Time'
                         }
                     }]
-                }
+                },
+                tooltips: {
+                    mode: 'index'
+                },
+                maintainAspectRatio: false
             }
             });
 
         }
     });
    
-    
+    //update chart every 30min
+    setTimeout(function() {
+        myChart.update();
+      }, 1800000);
 });

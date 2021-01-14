@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 
-include("../model/php/api_block2.php") ;
+include("../model/api_block2.php") ;
 
 //makes sure post has been initiated
 if(isset($_POST['editAnswer']))
@@ -21,7 +21,7 @@ if(isset($_POST['editAnswer']))
     $datatxt = json_encode($data);
     $res = editAnswer($datatxt) ;
 
-    header("Location: /~1803534/cmp306/view/block2.php");
+    header("Location: /~1803534/cmp306/block2/view/block2.php");
 
 }
 
@@ -41,7 +41,7 @@ if(isset($_POST['editQuestion']))
     $datatxt = json_encode($data);
     $res = editQuestion($datatxt) ;
 
-    header("Location: /~1803534/cmp306/view/block2.php");
+    header("Location: /~1803534/cmp306/block2/view/block2.php");
 
 }
 
@@ -51,7 +51,7 @@ if(isset($_POST['deleteQuestion']))
     $datatxt = json_encode($data);
     $res = deleteQuestion($datatxt) ;
 
-    header("Location: /~1803534/cmp306/view/block2.php");
+    header("Location: /~1803534/cmp306/block2/view/block2.php");
 
 }
 
@@ -61,9 +61,9 @@ if(isset($_POST['deleteAnswer']))
     $datatxt = json_encode($data);
     $res = deleteAnswer($datatxt) ;
 
-    header("Location: /~1803534/cmp306/view/block2.php");
+    header("Location: /~1803534/cmp306/block2/view/block2.php");
 
 }
 
-include("../../block1/model/php/close_connection.php") ;
+include("../../block1/model/close_connection.php") ;
  ?>

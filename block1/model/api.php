@@ -18,7 +18,7 @@ function getCards()
     global $conn;
 
     //fetch data from table in db
-    $sqlGenreDetails = "SELECT g.gId, Genre as genreTitle,  SUBSTRING(artDesc,1,100) AS artDescPreview, artPath, imgName, imgPath
+    $sqlGenreDetails = "SELECT g.gId as gId, Genre as genreTitle,  SUBSTRING(artDesc,1,100) AS artDescPreview, artPath, imgName, imgPath
     FROM `Music Genres` AS g
     RIGHT JOIN `Music GenreArticles` AS gA on gA.gId = g.gId
     RIGHT JOIN `Music GenreImages` AS gI on gI.gId = g.gId

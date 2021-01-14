@@ -2,7 +2,7 @@
 ob_start();
 session_start();
 
-    include("../model/php/api_block2.php") ;
+    include("../model/api_block2.php") ;
 
     //get the question info
     $questionsInfo = getQuestions();
@@ -169,7 +169,7 @@ session_start();
 
 
 
-      include("../../block1/model/php/close_connection.php");
+      include("../../block1/model/close_connection.php");
 
 
 
